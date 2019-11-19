@@ -1,0 +1,71 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">
+        Müşteri Detay
+    </ui:define>
+
+
+	<ui:define name="implementation">
+		<h:form>
+			<h:panelGrid id="container" columns="2" cellpadding="5">
+
+				<h:outputLabel for="fullname" value="Müşteri Ünvanı:" style="font-weight:bold" />
+				<p:inputText id="fullname" value="#{customerDetailMB.customer.fullname}" />
+
+				<h:outputLabel for="email" value="E-Mail:" style="font-weight:bold" />
+				<p:inputText id="email" value="#{customerDetailMB.customer.email}" />
+
+				<h:outputLabel for="phone" value="Telefon:" style="font-weight:bold" />
+				<p:inputMask id="phone" value="#{customerDetailMB.customer.phone}" mask="(999) 999-9999" />
+
+				<h:outputLabel for="isCorporate" value="Firma/Şahıs:" style="font-weight:bold" />
+				<p:selectBooleanCheckbox id="isCorporate" value="#{customerDetailMB.customer.isCorporate}" />
+
+				<h:outputLabel for="description" value="Notlar:" style="font-weight:bold" />
+				<p:inputTextarea id="description" value="#{customerDetailMB.customer.description}" rows="5" cols="30" maxlength="250" autoResize="false" />
+
+
+
+
+				<p:dataTable id="contacts" var="contact" value="#{customerDetailMB.customer.contacts}" emptyMessage="Kayıt Bulunamadı.">
+					<p:column headerText="Id">
+						<h:outputText value="#{contact.firstname}" />
+					</p:column>
+
+					<p:column headerText="Yıl">
+						<h:outputText value="#{contact.surname}" />
+					</p:column>
+
+					<p:column headerText="Marka">
+						<h:outputText value="#{contact.phone}" />
+					</p:column>
+
+					<p:column headerText="Şehir">
+						<h:outputText value="#{contact.address}" />
+					</p:column>
+				</p:dataTable>
+
+				<p:dataTable id="adreses" var="adres" value="#{customerDetailMB.customer.adresses}" emptyMessage="Kayıt Bulunamadı.">
+					<p:column headerText="Id">
+						<h:outputText value="#{adres.cityName}" />
+					</p:column>
+
+					<p:column headerText="Yıl">
+						<h:outputText value="#{adres.streetName}" />
+					</p:column>
+
+					<p:column headerText="Marka">
+						<h:outputText value="#{adres.zipCode}" />
+					</p:column>
+				</p:dataTable>
+
+
+			</h:panelGrid>
+			<p:commandButton value="Ajax Submit 1 " id="ajax1" update="@form" actionListener="#{customerDetailMB.bir}" styleClass="ui-priority-primary" />
+ 
+ 			<p:commandButton value="Ajax Submit 2 " id="ajax2" update="@form" actionListener="#{customerDetailMB.iki}" styleClass="ui-priority-primary" />
+ 
+
+		</h:form>
+	</ui:define>
+</ui:composition>

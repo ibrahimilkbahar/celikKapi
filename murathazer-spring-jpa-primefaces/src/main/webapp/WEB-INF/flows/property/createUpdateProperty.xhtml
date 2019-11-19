@@ -1,0 +1,66 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">
+        Özellik Tanımlama
+    </ui:define>
+
+
+
+	<ui:define name="implementation">
+		<h:form id="createPropertyForm">
+		
+			<p:fieldset legend="Özellik Bilgileri">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="name" value="Özellik Adı:" style="font-weight:bold" />
+					<p:inputText id="name" value="#{propertyController.property.name}" />
+
+					<h:outputLabel for="code" value="Özellik Kodu:" style="font-weight:bold" />
+					<p:inputText id="code" value="#{propertyController.property.code}" />
+
+					<h:outputLabel for="hint" value="Yardımcı Bilgi:" style="font-weight:bold" />
+					<p:inputText id="hint" value="#{propertyController.property.hint}" />
+			
+					<h:outputLabel for="price" value="Ücret Etkisi:" style="font-weight:bold" />
+					<p:inputNumber id="price" value="#{propertyController.property.price}" symbol=" TL" symbolPosition="s" decimalSeparator="," thousandSeparator="." />
+			
+					<p:outputLabel for="propertyTypeId" value="Özellik Tipi:" style="font-weight:bold" />
+					<p:selectOneMenu id="propertyTypeId" value="#{propertyController.propertyTypeId}" style="width:150px">
+						<f:ajax render="propertLovDefPart" />
+						<f:selectItem itemLabel="Özellik Tipi Seçiniz..." itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{propertyController.propertyTypeList}" var="propertyType" itemLabel="#{propertyType.name}" itemValue="#{propertyType.id}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel for="propertyGroupId" value="Özellik Grubu:" style="font-weight:bold" />
+					<p:selectOneMenu id="propertyGroupId" value="#{propertyController.propertyGroupId}" style="width:150px">
+						<f:selectItem itemLabel="Özellik Grubu Seçiniz..." itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{propertyController.propertyGroupList}" var="propertyGroup" itemLabel="#{propertyGroup.name}" itemValue="#{propertyGroup.id}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+			</p:fieldset>
+			<h:panelGroup id="propertLovDefPart">
+				<h:panelGroup rendered="#{propertyController.propertyTypeId eq 6}">
+					<p:fieldset legend="Seçim Liste Bilgileri">
+						<h:panelGrid columns="2" cellpadding="5">
+							<p:outputLabel for="propertyLovDefId" value="Özellik Grubu:" style="font-weight:bold" />
+							<p:selectOneMenu id="propertyLovDefId" value="#{propertyController.propertyLovDefId}" style="width:150px" required="true">
+								<f:selectItem itemLabel="Özellik Seçim Grubu Seçiniz..." itemValue="" noSelectionOption="true" />
+								<f:selectItems value="#{propertyController.propertyLovDefList}" var="propertyLovDef" itemLabel="#{propertyLovDef.name}" itemValue="#{propertyLovDef.id}" />
+							</p:selectOneMenu>
+						</h:panelGrid>
+					</p:fieldset>
+				</h:panelGroup>
+			</h:panelGroup>
+			
+			
+			<p:commandButton value="Geri" process="@this"  action="back"/>
+			<p:commandButton value="Kaydet" update="createPropertyForm" process="@form" icon="ui-icon-check" action="#{propertyController.saveProperty()}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

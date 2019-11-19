@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui" xmlns:pe="http://primefaces.org/ui/extensions" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">
+       dinamik Form 2
+    </ui:define>
+
+
+
+	<ui:define name="implementation">
+		<h:form id="mainForm" prependId="false">
+
+			<p:panel header="Select a Location" style="margin-bottom:10px;">
+				<ui:repeat id="property" value="#{dynaFormMB.properties}" var="field">
+					<h:panelGrid columns="2" cellpadding="5">
+						<p:outputLabel value="#{field.caption} : " style="font-weight:bold;width:150px" rendered="#{field.type == 'TEXT'}" />
+						<p:inputText value="#{field.value}" 
+									 style="font-weight:bold;size:150px" 
+									 rendered="#{field.type == 'TEXT'}" 
+									 required="#{field.mandatory}" 
+									 readonly="#{field.readonly}" />
+									 
+						<p:outputLabel value="#{field.caption} : " style="font-weight:bold;width:150px" rendered="#{field.type == 'PASSWORD'}" />
+        				<p:password  value="#{field.value}" 
+									 style="font-weight:bold;size:150px" 
+									 rendered="#{field.type == 'PASSWORD'}" 
+									 required="#{field.mandatory}" 
+									 readonly="#{field.readonly}" />
+						
+						<p:outputLabel value="#{field.caption} : " style="font-weight:bold;width:150px" rendered="#{field.type == 'DATE'}" />
+        			 	<p:calendar value="#{field.date}" 
+        			 				pattern="dd/MM/yyyy HH:mm" 
+        			 				size="17"
+        			 				rendered="#{field.type == 'DATE'}"
+        			 				required="#{field.mandatory}" 
+									readonly="#{field.readonly}">
+                        	<f:convertDateTime type="both" pattern="dd/MM/yyyy HH:mm" />
+                        </p:calendar>
+						
+						<p:outputLabel value="#{field.caption} : " style="font-weight:bold;width:150px" rendered="#{field.type == 'CHAINED_COMBO'}" />
+						<p:selectOneMenu value="#{field.value}" 
+										 style="width:150px"  
+										 rendered="#{field.type == 'CHAINED_COMBO'}" 
+										 required="#{field.mandatory}" 
+										 disabled="#{field.readonly}">
+							<p:ajax listener="#{dynaFormMB.onComboChanged(field.code)}" update="@form" />
+							<f:selectItem itemLabel="Seçiniz" itemValue="" noSelectionOption="!#{field.mandatory}" itemDisabled="#{field.mandatory}" />
+							<f:selectItems value="#{field.listOfValues}" />
+						</p:selectOneMenu>
+ 						
+						<p:outputLabel value="#{field.caption} : " style="font-weight:bold;width:150px" rendered="#{field.type == 'COMBO'}" />
+						<p:selectOneMenu value="#{field.value}" 
+										 style="width:150px" 
+										 rendered="#{field.type == 'COMBO'}" 
+										 required="#{field.mandatory}" 
+										 disabled="#{field.readonly}">
+							<f:selectItem itemLabel="Seçiniz" itemValue="" noSelectionOption="true" itemDisabled="#{field.mandatory}" />
+							<f:selectItems value="#{field.listOfValues}" />
+						</p:selectOneMenu>
+						
+						<p:outputLabel value="#{field.caption} : " style="font-weight:bold;width:150px" rendered="#{field.type == 'MONEY'}" />			 
+						<p:inputNumber value="#{field.value}" 
+									   style="font-weight:bold;size:150px" 
+									   rendered="#{field.type == 'MONEY'}" 
+									   required="#{field.mandatory}" 
+									   readonly="#{field.readonly}" 
+									   symbol=" TL" 
+									   symbolPosition="s" 
+									   decimalSeparator="," 
+									   thousandSeparator="." />
+									   
+						<p:outputLabel value="#{field.caption} : " style="font-weight:bold;width:150px" rendered="#{field.type == 'NUMBER'}" />			   
+						<p:inputNumber value="#{field.value}" 
+									   style="font-weight:bold;size:150px" 
+									   rendered="#{field.type == 'NUMBER'}"
+									   required="#{field.mandatory}" 
+									   readonly="#{field.readonly}"  
+									   decimalSeparator="" 
+									   thousandSeparator="" 
+									   minValue="-10000000" 
+									   maxValue="10000000"/>
+									   
+						<p:outputLabel value="#{field.caption} : " style="font-weight:bold;width:150px" rendered="#{field.type == 'IMAGE_UPLOAD'}" /> 						
+ 						<p:fileUpload value="#{field.value}" mode="simple" rendered="#{field.type == 'IMAGE_UPLOAD'}" skinSimple="true" />
+
+ 						
+ 
+					</h:panelGrid>
+				</ui:repeat>
+				
+			</p:panel>
+			<p:commandButton value="update 1 " id="ajax1" update="@form" actionListener="#{dynaFormMB.check}" styleClass="ui-priority-primary" />
+		</h:form>
+	</ui:define>
+</ui:composition>

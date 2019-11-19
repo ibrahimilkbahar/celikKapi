@@ -1,0 +1,80 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">
+        Özellik Seçim Listesi Tanımlama
+    </ui:define>
+
+
+
+	<ui:define name="implementation">
+		<h:form id="createPropertyLovDefForm">
+		
+			<p:fieldset legend="Özellik Seçim Listesi Bilgileri">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="lovDefName" value="Özellik Seçim Listesi Adı:" style="font-weight:bold" />
+					<p:inputText id="lovDefName" value="#{propertyLovDefController.propertyLovDef.name}" />
+
+					<h:outputLabel for="lovDefCode" value="Özellik Seçim Listesi Kodu:" style="font-weight:bold" />
+					<p:inputText id="lovDefCode" value="#{propertyLovDefController.propertyLovDef.code}" />
+				</h:panelGrid>
+			</p:fieldset>
+			<p:dataTable id="propertyLovList" var="propertyLov" 
+				value="#{propertyLovDefController.propertyLovList}" 
+				reflow="true"
+				rows="100" 
+				emptyMessage="Özellik Seçim Listesi Elemanları bulunamadı.">
+				<f:facet name="header">
+					Özellik Seçim Listesi Elemanları
+				</f:facet>
+				<p:column headerText="Ad">
+					<h:outputText value="#{propertyLov.name}" />
+				</p:column>
+
+				<p:column headerText="Kod">
+					<h:outputText value="#{propertyLov.code}" />
+				</p:column>
+				
+				<p:column headerText="Fiyat Etkisi">
+					<h:outputText value="#{propertyLov.price}" >
+						<f:convertNumber  locale="tr"/>
+					</h:outputText>
+				</p:column>
+
+				<p:column style="width:32px;text-align: center">
+					<p:commandButton update="propertyLovList" process="propertyLovList" icon="ui-icon-close" actionListener="#{propertyLovDefController.deletePropertyLov(propertyLov)}">
+						<p:confirm header="Özellik Seçim Listesi Elemanı Silinmesi" message="Özellik Seçim Listesi Elemanı Silinecektir Eminmisiniz??" icon="ui-icon-alert" />
+					</p:commandButton>
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Evet" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+						<p:commandButton value="Hayır" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+				</p:column>
+			</p:dataTable>
+			<h:panelGrid columns="1" cellpadding="5" rendered="#{propertyLovDefController.propertyLovDef.id >0}">
+			<p:fieldset legend="Özellik Seçim Listesi Elemanı Ekleme" id="savePropertyLov" toggleable="true" toggleSpeed="500" collapsed="true" >
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="name" value="Adı:" style="font-weight:bold" />
+					<p:inputText id="name" value="#{propertyLovDefController.propertyLov.name}" />
+	
+					<h:outputLabel for="code" value="Kod:" style="font-weight:bold" />
+					<p:inputText id="code" value="#{propertyLovDefController.propertyLov.code}" />
+	
+					<h:outputLabel for="price" value="Ücret Etkisi:" style="font-weight:bold" />
+					<p:inputNumber id="price" value="#{propertyLovDefController.propertyLov.price}" symbol=" TL" symbolPosition="s" decimalSeparator="," thousandSeparator="." />
+				</h:panelGrid>
+				<p:commandButton value="Özellik Seçim Listesi Elemanı Kaydet" id="savePropertyLovBtn" process="savePropertyLov" 
+								 update="propertyLovList,savePropertyLov" actionListener="#{propertyLovDefController.savePropertyLov}" styleClass="ui-priority-primary" />
+			</p:fieldset>
+			</h:panelGrid>
+			<p:commandButton value="Geri" process="@this"  action="back"/>
+			<p:commandButton value="Kaydet" update="createPropertyLovDefForm" process="@form" icon="ui-icon-check" action="#{propertyLovDefController.savePropertyLovDef()}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>

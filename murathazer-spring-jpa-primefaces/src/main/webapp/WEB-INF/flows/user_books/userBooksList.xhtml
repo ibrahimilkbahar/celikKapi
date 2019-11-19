@@ -1,0 +1,36 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <h:form id="bookListForm">
+            <p:tooltip/>
+            <div class="ui-g-12">
+                <div>
+                    <p:commandButton action="addNewBook" value="Add New Book" />
+                    <br />
+                    <br />
+                    <p:dataTable value="#{userBooksController.userBooks}" var="_userBook" rowIndexVar="_index">
+                        <p:column headerText="#">
+                            #{_index + 1}
+                        </p:column>
+                        <p:column headerText="Title">
+                            #{_userBook.title}
+                        </p:column>
+                        <p:column headerText="Author">
+                            #{_userBook.author}
+                        </p:column>
+                        <p:column headerText="Description">
+                            #{_userBook.description}
+                        </p:column>
+                    </p:dataTable>
+                </div>
+            </div>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>

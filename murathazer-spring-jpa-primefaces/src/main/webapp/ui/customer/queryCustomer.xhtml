@@ -1,0 +1,40 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">
+        Müşteri Sorgulama
+    </ui:define>
+
+ 
+
+    <ui:define name="implementation">
+        <h:form>
+           	<p:dataTable var="car" value="#{dtBasicView.cars}" emptyMessage="Kayıt Bulunamadı.">
+			    <p:column headerText="Id">
+			        <h:outputText value="#{car.id}" />
+			    </p:column>
+			 
+			    <p:column headerText="Yıl">
+			        <h:outputText value="#{car.year}" />
+			    </p:column>
+			 
+			    <p:column headerText="Marka">
+			        <h:outputText value="#{car.brand}" />
+			    </p:column>
+			 
+			    <p:column headerText="Şehir">
+			        <h:outputText value="#{car.color}" />
+			    </p:column>
+			    <p:column headerText="Action">
+                    <p:commandLink ajax="false" title="Edit" action="/ui/customer/customerDetail.xhtml" value="Edit">
+                        <f:param name="objectId" value="#{car.year}" />                        
+                    </p:commandLink>
+                </p:column>
+			</p:dataTable>
+        </h:form>
+    </ui:define>
+</ui:composition>

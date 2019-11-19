@@ -1,0 +1,211 @@
+<!DOCTYPE html [
+    <!ENTITY nbsp "&#160;">
+    <!ENTITY bull "&#8226;">
+    <!ENTITY copy "&#169;">
+]>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:h="http://java.sun.com/jsf/html" 
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets" 
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<link rel="shortcut icon" type="image/png" href="#{request.contextPath}/resources/main/images/favicon.png" />
+	</f:facet>
+
+	<title>Eck Otomasyon Sistemi</title>
+	<h:outputStylesheet name="main/css/showcase.css" />
+	<h:outputStylesheet name="main/css/perfect-scrollbar.css" />
+	<h:outputStylesheet name="main/css/sh.css" />
+	<h:outputScript name="jquery/jquery.js" library="primefaces" />
+	<h:outputScript name="jquery/jquery-plugins.js" library="primefaces" />
+	<h:outputScript name="main/js/perfect-scrollbar.js" />
+	<h:outputScript name="main/js/showcase.js" />
+	<ui:insert name="head" />
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+  		_gaq.push(['_setAccount', 'UA-12200033-1']);
+  		_gaq.push(['_trackPageview']);
+
+  		(function() {
+   			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    		ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  		})();
+	</script>
+</h:head>
+
+<h:body style="font-size: 12px;">
+
+	<!-- PC CONTENT STARTS HERE-->
+	<div class="PC">
+
+		<div id="MENUSIDE">
+			<div id="MENUSIDEindent">
+				<div class="MenuSideMainLink bordersOfMenuSide">
+					<h:graphicImage name="main/images/zoom.svg" class="zoomIcon" />
+					<input id="menuSearch" type="text" placeholder="Arama" class="boldFont fontSize14 mustClose searchInput" />
+				</div>
+
+				<span id="SubMenu-Ajax" class="MenuSideMainLink bordersOfMenuSide" onclick="Showcase.openSubMenu(this);">
+					<h:graphicImage name="main/images/mono/ajaxCore.svg" /> 
+					<h:graphicImage styleClass="hiddenIcons" name="main/images/mono/ajaxCoreBlue.svg" />
+					<span class="MainLinkText">Müşteri İşlemleri</span>
+				</span>
+				
+				<div class="SubMenuLinkContainer">
+					<a class="SubMenuLink" href="#{request.contextPath}/swf/customer">&bull; Müşteri Sorgulama ve Oluşturma</a>
+
+					<!--  <h:form>
+						<h:commandLink action="createCustomer" value="&bull; Müşteri Oluşturma" styleClass="SubMenuLink" />
+					</h:form>-->
+				</div>
+ 
+				<span id="SubMenu-Button" class="MenuSideMainLink bordersOfMenuSide" onclick="Showcase.openSubMenu(this);">
+					<h:graphicImage name="main/images/mono/input.svg" />
+					<h:graphicImage styleClass="hiddenIcons" name="main/images/mono/inputBlue.svg" />
+					<span class="MainLinkText">Sipariş İşlemleri</span>
+				</span>
+				<div class="SubMenuLinkContainer">
+					<a class="SubMenuLink" href="#{request.contextPath}/ui/button/button.xhtml">&bull; Sipariş Oluşturma</a> 
+					<a class="SubMenuLink" href="#{request.contextPath}/ui/button/commandButton.xhtml">&bull; Sipariş Sorgulama</a> 
+					<a class="SubMenuLink" href="#{request.contextPath}/ui/button/commandLink.xhtml">&bull; Sipariş Onaylama</a> 
+					<a class="SubMenuLink" href="#{request.contextPath}/ui/button/link.xhtml">&bull; Sipariş Raporları</a> 
+				</div>
+
+				<span id="SubMenu-Input" class="MenuSideMainLink bordersOfMenuSide" onclick="Showcase.openSubMenu(this);">
+					<h:graphicImage name="main/images/mono/file.svg" /> 
+					<h:graphicImage styleClass="hiddenIcons" name="main/images/mono/fileBlue.svg" />
+					<span class="MainLinkText">Sunu İşlemleri</span>
+				</span>
+				<div class="SubMenuLinkContainer">
+					<a class="SubMenuLink" href="#{request.contextPath}/swf/property">&bull; Özellik Tanımlama</a>
+					<a class="SubMenuLink" href="#{request.contextPath}/swf/propertyLovDef">&bull; Özellik Seçim Listesi Tanımlama</a>
+					<a class="SubMenuLink" href="#{request.contextPath}/swf/offering">&bull; Sunu Tanımlama</a>  
+					<a class="SubMenuLink" href="#{request.contextPath}/swf/offeringProperty">&bull; Sunu - Özellik Tanımlama</a> 
+				</div>
+
+				<span id="SubMenu-Data" class="MenuSideMainLink bordersOfMenuSide" onclick="Showcase.openSubMenu(this);">
+					<h:graphicImage name="main/images/mono/data.svg" /> 
+					<h:graphicImage styleClass="hiddenIcons" name="main/images/mono/dataBlue.svg" />
+					<span class="MainLinkText">Raporlar</span>
+				</span>
+				<div class="SubMenuLinkContainer">
+					<a class="SubMenuLink" href="#{request.contextPath}/ui/data/carousel.xhtml">&bull; Sipariş Detay Raporu</a> 
+					<a class="SubMenuLink" href="#{request.contextPath}/ui/data/dataGrid.xhtml">&bull; Ürün Dağılım Raporu</a> 
+					<a class="SubMenuLink" href="#{request.contextPath}/ui/data/dataList.xhtml">&bull; Satış Temcilcisi Performansı</a> 
+					<a class="SubMenuLink" href="#{request.contextPath}/ui/data/datascroller/basic.xhtml">&bull; Depo Raporu</a> 
+				</div>
+			</div>
+		</div>
+
+		<script type="text/javascript">
+	        restoreMenuState();
+	    </script>
+
+		<div id="CONTENTSIDE">
+			<div id="CONTENTSIDEindent">
+
+				<!-- header bar start-->
+				<div class="ContentSideSections" id="PFTopLinksCover">
+ 					
+ 					<a id="LOGOTEXTSIDE" href="#{request.contextPath}/index.xhtml"> 
+						<h:graphicImage name="main/images/logo.png" style="height:40px;" styleClass="floatLeft" />
+					</a> 
+					
+
+					<div class="col-md-9" align="right">
+					    <p:button
+					            icon="fa fa-sign-in"
+					            value="Çıkış"
+					            styleClass="btn btn-xs btn-danger text-right"
+					            href="/logout"/>
+					</div>
+					<div class="col-md-3" align="right">
+					    <span style="color: black; font-weight: bold">#{visit.user.loginName}</span>
+					</div>
+            
+					
+				 
+					<a id="mobile-menu-btn" href="#">
+                    	<i class="fa fa-bars"></i>
+                	</a>
+					<div class="mobileLogoCover">
+						<h:graphicImage name="main/images/logo.png" style="height:40px;" styleClass="floatLeft marginRight10" />
+					</div>
+					
+
+
+				</div>
+				<!-- header bar end-->
+
+				<div class="content-container">
+					<ui:insert name="content">
+
+						<ui:insert name="subsubmenu"></ui:insert>
+
+						<div class="ContentSideSections">
+							<div class="Content100 overHidden TextShadow">
+								<span class="fontSize30 TextShadow orange regularFont marginBottom20 dispBlock">
+									<ui:insert name="title" />
+								</span> 
+								<span class="defaultText dispTable">
+									<ui:insert name="description" /> 
+								</span>
+							</div>
+						</div>
+
+						<div class="ContentSideSections Implementation">
+							<ui:insert name="implementation" />
+						</div>
+
+						<div id="SourceContentSide" class="ContentSideSections Source">
+							<div class="Content100 overHidden TextShadow">
+								<span class="defaultText"> <span class="fontSize18 logoBlueText"> <ui:insert name="source" />
+								</span>
+								</span>
+							</div>
+						</div>
+
+					</ui:insert>
+				</div>
+
+				<!-- footer start-->
+				<div class="ContentSideSections">
+					<span class="floatLeft fontSize14 gray"> <a href="http://www.eck.com.tr">www.eck.com.tr</a>, Copyright &copy; 2017<br />
+					</span>
+					<div style="clear: both" />
+				</div>
+				<!-- footer end-->
+
+			</div>
+		</div>
+
+	</div>
+	<!-- PC CONTENT END-->
+
+	<ui:insert name="status">
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">
+			<f:facet name="start">
+				<p:graphicImage name="main/images/loader.gif" />
+			</f:facet>
+
+			<f:facet name="complete">
+				<h:outputText value="" />
+			</f:facet>
+		</p:ajaxStatus>
+	</ui:insert>
+
+	<ui:insert name="highlight">
+		<h:outputScript name="main/js/sh.js" target="body" />
+	</ui:insert>
+
+	<ui:insert name="body"></ui:insert>
+</h:body>
+</html>

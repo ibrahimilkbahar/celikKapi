@@ -1,0 +1,46 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">
+        Yeni Müşteri
+    </ui:define>
+
+
+
+	<ui:define name="implementation">
+		<h:form>
+			<h:panelGrid columns="2" cellpadding="5">
+
+				<h:outputLabel for="fullname" value="Müşteri Ünvanı:" style="font-weight:bold" />
+				<p:inputText id="fullname" value="#{createCustomerMB.fullname}" />
+
+				<h:outputLabel for="email" value="E-Mail:" style="font-weight:bold" />
+				<p:inputText id="email" value="#{createCustomerMB.email}" />
+
+				<h:outputLabel for="phone" value="Telefon:" style="font-weight:bold" />
+				<p:inputMask id="phone" value="#{createCustomerMB.phone}" mask="(999) 999-9999" />
+
+				<h:outputLabel for="isCorporate" value="Firma/Şahıs:" style="font-weight:bold" />
+				<p:selectBooleanCheckbox id="isCorporate" value="#{createCustomerMB.isCorporate}" />
+
+				<h:outputLabel for="description" value="Notlar:" style="font-weight:bold" />
+				<p:inputTextarea id="description" value="#{createCustomerMB.description}" rows="5" cols="30" maxlength="250" autoResize="false" />
+
+				<p:commandButton value="Kaydet" update="display" />
+				<h:outputText id="display" value="#{createCustomerMB.display}" />
+			</h:panelGrid>
+
+			<p:growl autoUpdate="true" />
+
+			
+
+
+		</h:form>
+	</ui:define>
+</ui:composition>

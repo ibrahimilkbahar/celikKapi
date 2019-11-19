@@ -1,0 +1,38 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <h:form id="bookForm">
+            <p:tooltip/>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <p:panelGrid columns="1" styleClass="ui-fluid">
+                        <h:panelGroup layout="grid">
+                            <p:outputLabel value="Title *" />
+                            <p:inputText value="#{userBooksController.newBook.title}" required="true" requiredMessage="Title is required"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:outputLabel value="Author *" />
+                            <p:inputText value="#{userBooksController.newBook.author}" required="true" requiredMessage="Author is required"/>
+                        </h:panelGroup>
+                        <h:panelGroup>
+                            <p:outputLabel value="Description" />
+                            <p:inputText value="#{userBooksController.newBook.description}" />
+                        </h:panelGroup>
+                        <p:chart type="bar" model="#{mainPageController.combinedModel}" style="height:300px" />
+                    </p:panelGrid>
+                    <p:panelGrid columns="2" styleClass="ui-fluid">
+                        <p:commandButton value="Back" process="@this" action="back"/>
+                        <p:commandButton value="Save" action="#{userBooksController.saveNewBook()}"/>
+                    </p:panelGrid>
+                </div>
+            </div>
+        </h:form>
+
+
+    </ui:define>
+</ui:composition>

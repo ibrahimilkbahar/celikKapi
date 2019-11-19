@@ -1,0 +1,61 @@
+<ui:composition 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:ui="http://java.sun.com/jsf/facelets" 
+	xmlns:h="http://java.sun.com/jsf/html" 
+	xmlns:f="http://java.sun.com/jsf/core" 
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="title">
+        Sunu Tanımlama
+    </ui:define>
+
+
+
+	<ui:define name="implementation">
+		<h:form id="createOfferingForm">
+			<p:fieldset legend="Sunu Bilgileri">
+				<h:panelGrid columns="2" cellpadding="5">
+					<h:outputLabel for="name" value="Sunu Adı:" style="font-weight:bold" />
+					<p:inputText id="name" value="#{offeringController.offering.name}" />
+
+					<h:outputLabel for="code" value="Sunu Kodu:" style="font-weight:bold" />
+					<p:inputText id="code" value="#{offeringController.offering.code}" />
+
+					<h:outputLabel for="description" value="Notlar:" style="font-weight:bold" />
+					<p:inputTextarea id="description" value="#{offeringController.offering.description}" rows="5" cols="30" maxlength="250" autoResize="false" />
+			
+					<h:outputLabel for="isSaleable" value="Satılabilir/Satılamaz:" style="font-weight:bold" />
+					<p:selectBooleanButton id="isSaleable" value="#{offeringController.offering.isSaleable}" onLabel="Satılabilir" offLabel="Satılamaz" />
+			
+					<p:outputLabel for="productTypeId" value="Ürün Tipi:" style="font-weight:bold" />
+					<p:selectOneMenu id="productTypeId" value="#{offeringController.productTypeId}" style="width:150px">
+						<f:selectItem itemLabel="Ürün Tipi Seçiniz..." itemValue="" noSelectionOption="true" />
+						<f:selectItems value="#{offeringController.productTypeList}" var="productType" itemLabel="#{productType.name}" itemValue="#{productType.id}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+			</p:fieldset>
+
+			<h:panelGrid columns="1" cellpadding="5" id="offeringPropertyInfo"
+				rendered="#{offeringController.offering.id >0}">
+				<p:fieldset legend="Sunu-Ana Özellikler Tanımlama"
+					id="offeringPropertyFieldList" toggleable="false" collapsed="false">
+					<p:pickList id="offeringPropertyListMain"
+						value="#{offeringController.offeringPropertyListMain}"
+						var="offeringProperty"
+						itemLabel="#{offeringProperty.propertyId.name}"
+						itemValue="#{offeringProperty.propertyId.id}">
+						<p:ajax event="select"
+							listener="#{offeringController.onSelectOfferingProperty}"
+							update="offeringPropertyListMain" />
+					</p:pickList>
+
+
+				</p:fieldset>
+			</h:panelGrid>
+			<p:commandButton value="Geri" process="@this"  action="back"/>
+			<p:commandButton value="Kaydet" update="createOfferingForm" process="@form" icon="ui-icon-check" action="#{offeringController.saveOffering()}"/>
+		</h:form>
+	</ui:define>
+</ui:composition>
