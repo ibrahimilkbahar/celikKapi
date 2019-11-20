@@ -13,7 +13,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 public class SpringJpaPrimefacesApplication extends SpringBootServletInitializer
 {
 	public static void main(String[] args)
-	{
+	{//sss
 		SpringApplication.run(SpringJpaPrimefacesApplication.class, args);
 	}
 
