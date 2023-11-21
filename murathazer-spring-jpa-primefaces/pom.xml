@@ -31,7 +31,7 @@
 		<cdi.version>1.2</cdi.version>
 
 		<jsf.version>2.2.13</jsf.version>
-		<primefaces.version>6.0</primefaces.version>
+		<primefaces.version>8.0</primefaces.version>
 
 		<guava.version>20.0</guava.version>
 	</properties>
